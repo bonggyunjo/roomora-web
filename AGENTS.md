@@ -14,7 +14,7 @@ layer: L0
 
 ## 3. 기준 문서 우선순위 & 라우팅 지도
 - **우선순위**: `DEC(decisions.md) > L1(system_architecture.md) > L2(*_spec.md)`
-- **외부 옵시디언 볼트**: `../dev-obsidian-base/10_Projects/aesthetics-of-space-v2/`
+- **외부 옵시디언 볼트**: `../dev-obsidian-base/10_Projects/roomora/`
   - 세션 시작 시: `activeContext.md` + `00_MOC/project_moc.md` 먼저 열람
   - 기능 구현 시: `02_Specs_and_Skills/<domain>_spec.md` 열람 후 `plan.md` 작성
 

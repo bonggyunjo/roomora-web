@@ -9,5 +9,5 @@
 - **SEO & Sharing**: Nuxt `useSeoMeta` 기반 레시피/콘테스트 OG 메타태그 지원
 
 ## 문서 & 하네스 연동
-- 공용 설계 문서(옵시디언): `../dev-obsidian-base/10_Projects/aesthetics-of-space-v2/`
+- 공용 설계 문서(옵시디언): `../dev-obsidian-base/10_Projects/roomora/`
 - 에이전트 작업 규칙: [AGENTS.md](./AGENTS.md)
