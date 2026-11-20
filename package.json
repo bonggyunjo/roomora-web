@@ -10,9 +10,15 @@
     "postinstall": "nuxt prepare",
     "typecheck": "nuxi typecheck"
   },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.5",
+    "pinia": "^2.2.6"
+  },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.12.2",
     "nuxt": "^3.14.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vue-tsc": "^3.3.14"
   }
 }
