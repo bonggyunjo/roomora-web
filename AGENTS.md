@@ -30,8 +30,9 @@ layer: L0
 ## 6. 금지 구역 (Do Not Touch)
 - `.env`, `.nuxt/`, `.output/` 생성물
 
-## 7. 절대 금지 규칙
+## 7. 절대 금지 규칙 (UI Anti-Pattern 포함)
 - 추측성 API 스펙 구현 금지, 무단 패키지 설치 금지, 고정 `px` 위주 비반응형 레이아웃 금지
+- **UI 금지 목록**: 과한 네온 그라데이션, 카드 안의 카드 중첩(Card-in-Card), 제목마다 이모지 남발, 요청 없는 가짜 통계 배지, AI/개발자 용어(`RAG`, `Citation`, `1-Click`, `404`) 노출, 브라우저 기본 `alert()`/`confirm()` 사용 금지
 
 ## 8. 미결정 사항 (Ask Before Coding)
 - 디자인 토큰/컬러 시스템 또는 인증 토큰 저장 방식(HttpOnly Cookie vs Memory) 변경 시 구현 전 확인한다.
@@ -41,4 +42,5 @@ layer: L0
 - 커밋: Conventional Commits (예: `feat: AI RAG 검색 결과 및 예산 배분 카드 UI 구현`)
 
 ## 10. 완료 기준 (Definition of Done)
-- 스펙(`REQ-nnn`) 충족 + `typecheck` 통과(`Exit Code 0`) + `activeContext.md`(50줄 이내 덮어쓰기) 및 L2/L3 문서 동기화
+- 스펙(`REQ-nnn`) + `ui_design_system.md` 4대 상태(Empty/Skeleton/Error/Overflow) & 버튼 5대 상태 준수
+- `typecheck` + `nuxt build` 통과(`Exit Code 0`) 및 데스크톱·모바일(`375px`) 렌더링 확인 + `activeContext.md` 동기화
