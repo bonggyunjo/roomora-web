@@ -147,3 +147,27 @@ export interface ChecklistItem {
 export interface ChecklistDetail extends ChecklistSummary {
   items: ChecklistItem[]
 }
+
+export interface CommentItem {
+  id: number
+  parentId: number | null
+  authorId?: number
+  authorNickname: string
+  content: string
+  createdAt: string
+}
+
+export interface FollowUserItem {
+  userId: number
+  nickname: string
+  profileImageUrl: string | null
+  bio: string | null
+}
+
+export interface PagedListResponse<T> {
+  items: T[]
+  page: number
+  size: number
+  totalElements: number
+  hasNext: boolean
+}

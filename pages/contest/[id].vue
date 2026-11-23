@@ -1,40 +1,44 @@
 <template>
-  <div v-if="post" class="max-w-3xl mx-auto bg-white rounded-3xl border border-zinc-200/80 overflow-hidden">
-    <div v-if="post.images.length" class="aspect-[16/10] bg-zinc-200">
-      <img :src="post.images[0]" :alt="post.title" class="w-full h-full object-cover" />
-    </div>
-    <div class="p-6 md:p-10 space-y-6">
-      <div class="flex items-center justify-between">
-        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-zinc-100 text-zinc-800">
-          콘테스트 출품작 · {{ post.voteCount }}표
-        </span>
-        <NuxtLink :to="`/users/${post.authorId}`" class="text-sm font-medium text-zinc-700 hover:text-[#8C583A]">
-          by {{ post.authorNickname }}
-        </NuxtLink>
+  <div v-if="post" class="max-w-3xl mx-auto space-y-8">
+    <div class="bg-white rounded-3xl border border-zinc-200/80 overflow-hidden">
+      <div v-if="post.images.length" class="aspect-[16/10] bg-zinc-200">
+        <img :src="post.images[0]" :alt="post.title" class="w-full h-full object-cover" />
       </div>
+      <div class="p-6 md:p-10 space-y-6">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold px-3 py-1 rounded-full bg-zinc-100 text-zinc-800">
+            콘테스트 출품작 · {{ post.voteCount }}표
+          </span>
+          <NuxtLink :to="`/users/${post.authorId}`" class="text-sm font-medium text-zinc-700 hover:text-[#8C583A]">
+            by {{ post.authorNickname }}
+          </NuxtLink>
+        </div>
 
-      <h1 class="text-2xl md:text-3xl font-bold text-zinc-900 break-words">{{ post.title }}</h1>
-      <p class="text-zinc-700 whitespace-pre-line text-sm md:text-base leading-relaxed">{{ post.content }}</p>
+        <h1 class="text-2xl md:text-3xl font-bold text-zinc-900 break-words">{{ post.title }}</h1>
+        <p class="text-zinc-700 whitespace-pre-line text-sm md:text-base leading-relaxed">{{ post.content }}</p>
 
-      <div class="flex gap-3 pt-4 border-t border-zinc-100">
-        <button
-          type="button"
-          :disabled="post.votedByMe"
-          class="flex-1 py-3 rounded-xl font-semibold text-sm active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition"
-          :class="post.votedByMe ? 'bg-zinc-200 text-zinc-700' : 'bg-zinc-900 text-white hover:bg-zinc-800'"
-          @click="handleVote"
-        >
-          {{ post.votedByMe ? '이번 회차 투표 완료' : '이 공간에 투표하기 (회차당 1표)' }}
-        </button>
-        <button
-          type="button"
-          class="px-5 py-3 rounded-xl border border-zinc-300 text-sm font-semibold hover:bg-zinc-50 active:scale-[0.98] transition"
-          @click="handleScrap"
-        >
-          ★ 북마크 {{ post.scrapCount }}
-        </button>
+        <div class="flex gap-3 pt-4 border-t border-zinc-100">
+          <button
+            type="button"
+            :disabled="post.votedByMe"
+            class="flex-1 py-3 rounded-xl font-semibold text-sm active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed transition"
+            :class="post.votedByMe ? 'bg-zinc-200 text-zinc-700' : 'bg-zinc-900 text-white hover:bg-zinc-800'"
+            @click="handleVote"
+          >
+            {{ post.votedByMe ? '이번 회차 투표 완료' : '이 공간에 투표하기 (회차당 1표)' }}
+          </button>
+          <button
+            type="button"
+            class="px-5 py-3 rounded-xl border border-zinc-300 text-sm font-semibold hover:bg-zinc-50 active:scale-[0.98] transition"
+            @click="handleScrap"
+          >
+            ★ 북마크 {{ post.scrapCount }}
+          </button>
+        </div>
       </div>
     </div>
+
+    <CommentSection :endpoint="`/api/contests/posts/${id}/comments`" />
   </div>
 </template>
 

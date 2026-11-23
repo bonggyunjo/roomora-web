@@ -1,11 +1,19 @@
 <template>
   <div class="space-y-10">
-    <div v-if="activeRound" class="rounded-3xl bg-zinc-900 text-white p-8 md:p-12 space-y-3">
-      <span class="inline-block text-[11px] font-semibold tracking-wider px-3 py-1 rounded-full bg-white/10 text-amber-200">
-        ROUND {{ activeRound.roundNo }} · 진행 중
-      </span>
-      <h1 class="text-2xl md:text-4xl font-bold tracking-tight">{{ activeRound.title }}</h1>
-      <p class="text-zinc-300 text-sm md:text-base max-w-2xl">{{ activeRound.themeDescription }}</p>
+    <div v-if="activeRound" class="rounded-3xl bg-zinc-900 text-white p-8 md:p-12 flex flex-wrap items-end justify-between gap-6">
+      <div class="space-y-3">
+        <span class="inline-block text-[11px] font-semibold tracking-wider px-3 py-1 rounded-full bg-white/10 text-amber-200">
+          ROUND {{ activeRound.roundNo }} · 진행 중
+        </span>
+        <h1 class="text-2xl md:text-4xl font-bold tracking-tight">{{ activeRound.title }}</h1>
+        <p class="text-zinc-300 text-sm md:text-base max-w-2xl">{{ activeRound.themeDescription }}</p>
+      </div>
+      <NuxtLink
+        to="/contest/submit"
+        class="px-5 py-3 rounded-full bg-white text-zinc-900 text-sm font-semibold hover:bg-zinc-100 active:scale-[0.98] transition shrink-0"
+      >
+        내 공간 출품하기 →
+      </NuxtLink>
     </div>
 
     <section class="space-y-6">

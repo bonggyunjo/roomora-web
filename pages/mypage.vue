@@ -8,16 +8,24 @@
         <p v-if="profile.bio" class="text-sm text-zinc-700 mt-2">{{ profile.bio }}</p>
       </div>
       <div class="flex gap-8 text-center">
-        <div>
+        <button type="button" class="hover:opacity-75 transition" @click="openFollowModal('followers')">
           <div class="font-bold text-xl text-zinc-900">{{ profile.followerCount }}</div>
           <div class="text-xs text-zinc-500">팔로워</div>
-        </div>
-        <div>
+        </button>
+        <button type="button" class="hover:opacity-75 transition" @click="openFollowModal('followings')">
           <div class="font-bold text-xl text-zinc-900">{{ profile.followingCount }}</div>
           <div class="text-xs text-zinc-500">팔로잉</div>
-        </div>
+        </button>
       </div>
     </div>
+
+    <FollowListModal
+      v-if="profile"
+      :open="followModalOpen"
+      :user-id="profile.id"
+      :mode="followModalMode"
+      @close="followModalOpen = false"
+    />
 
     <!-- Tabs -->
     <div class="flex flex-wrap gap-2 border-b border-zinc-200 pb-3 text-xs md:text-sm font-medium">
@@ -192,6 +200,14 @@ async function deleteChecklist(id: number) {
   checklists.value = checklists.value.filter((c: ChecklistSummary) => c.id !== id)
   if (selectedChecklist.value?.id === id) selectedChecklist.value = null
   ui.toast('체크리스트를 삭제했습니다.', 'info')
+}
+
+const followModalOpen = ref(false)
+const followModalMode = ref<'followers' | 'followings'>('followers')
+
+function openFollowModal(mode: 'followers' | 'followings') {
+  followModalMode.value = mode
+  followModalOpen.value = true
 }
 
 onMounted(async () => {

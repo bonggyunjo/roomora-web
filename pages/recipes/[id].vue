@@ -78,52 +78,12 @@
     </article>
 
     <!-- Comments -->
-    <section class="bg-white rounded-3xl border border-zinc-200/80 p-6 md:p-8 space-y-5">
-      <h2 class="text-base font-bold text-zinc-900">댓글 ({{ comments.length }})</h2>
-      <form class="flex gap-2" @submit.prevent="submitComment(null)">
-        <input
-          v-model="commentInput"
-          type="text"
-          placeholder="공간에 대한 궁금한 점을 남겨보세요"
-          class="flex-1 px-4 py-2.5 rounded-xl border border-zinc-300 text-sm focus:outline-none focus:border-zinc-900"
-        />
-        <button
-          type="submit"
-          class="px-4 py-2.5 rounded-xl bg-zinc-900 text-white text-sm font-semibold hover:bg-zinc-800 active:scale-[0.98]"
-        >
-          등록
-        </button>
-      </form>
-
-      <div v-if="comments.length" class="space-y-3">
-        <div
-          v-for="c in comments"
-          :key="c.id"
-          class="p-4 rounded-2xl bg-[#FAF9F6] border border-zinc-200/70 text-sm"
-          :class="{ 'ml-8': c.parentId }"
-        >
-          <div class="flex justify-between text-xs text-zinc-500 mb-1">
-            <span class="font-semibold text-zinc-800">{{ c.authorNickname }}</span>
-            <span>{{ new Date(c.createdAt).toLocaleDateString() }}</span>
-          </div>
-          <p class="text-zinc-800 break-words">{{ c.content }}</p>
-        </div>
-      </div>
-      <p v-else class="text-xs text-zinc-400 text-center py-4">첫 댓글을 남겨보세요.</p>
-    </section>
+    <CommentSection :endpoint="`/api/recipes/${id}/comments`" />
   </div>
 </template>
 
 <script setup lang="ts">
 import type { RecipeDetail } from '~/types/api'
-
-interface CommentItem {
-  id: number
-  parentId: number | null
-  authorNickname: string
-  content: string
-  createdAt: string
-}
 
 const route = useRoute()
 const router = useRouter()
@@ -133,12 +93,6 @@ const { request, baseUrl } = useApi()
 
 const id = route.params.id
 const { data: recipe } = await useFetch<RecipeDetail>(`${baseUrl}/api/recipes/${id}`)
-const comments = ref<CommentItem[]>([])
-const commentInput = ref('')
-
-async function loadComments() {
-  comments.value = await request<CommentItem[]>(`/api/recipes/${id}/comments`)
-}
 
 async function toggleLike() {
   if (!auth.isLoggedIn) {
@@ -173,21 +127,4 @@ async function deleteRecipe() {
   ui.toast('레시피가 삭제되었습니다.', 'info')
   await router.push('/recipes')
 }
-
-async function submitComment(parentId: number | null) {
-  if (!auth.isLoggedIn) return router.push('/login')
-  if (!commentInput.value.trim()) {
-    ui.toast('댓글 내용을 입력해 주세요.', 'error')
-    return
-  }
-  await request(`/api/recipes/${id}/comments`, {
-    method: 'POST',
-    body: { parentId, content: commentInput.value.trim() }
-  })
-  commentInput.value = ''
-  ui.toast('댓글을 등록했습니다.')
-  await loadComments()
-}
-
-onMounted(loadComments)
 </script>
