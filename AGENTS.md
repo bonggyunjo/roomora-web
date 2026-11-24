@@ -16,7 +16,12 @@ layer: L0
 - **우선순위**: `DEC(decisions.md) > L1(system_architecture.md) > L2(*_spec.md)`
 - **외부 옵시디언 볼트**: `../dev-obsidian-base/10_Projects/roomora/`
   - 세션 시작 시: `activeContext.md` + `00_MOC/project_moc.md` + **`01_Core_Rules/ui_design_system.md`** 먼저 열람
-  - 기능 구현 시: `02_Specs_and_Skills/<domain>_spec.md` 열람 후 `plan.md` 작성
+  - **페이지별 1:1 L2 스펙 라우팅**:
+    - `pages/login.vue`, `pages/auth/*`: `../dev-obsidian-base/10_Projects/roomora/02_Specs_and_Skills/auth_oauth_spec.md`
+    - `pages/recipes/*`: `../dev-obsidian-base/10_Projects/roomora/02_Specs_and_Skills/recipe_community_spec.md`
+    - `pages/contest/*`: `../dev-obsidian-base/10_Projects/roomora/02_Specs_and_Skills/contest_ranking_spec.md`
+    - `pages/search.vue`: `../dev-obsidian-base/10_Projects/roomora/02_Specs_and_Skills/rag_search_spec.md`
+    - `pages/mypage.vue`, `pages/users/*`: `../dev-obsidian-base/10_Projects/roomora/02_Specs_and_Skills/mypage_social_spec.md` & `checklist_spec.md`
 
 ## 4. 빌드·테스트 명령 (Narrowest Verification)
 - 타입 체크: `npx nuxi typecheck`
