@@ -4,7 +4,9 @@
       <div>
         <p class="text-xs font-semibold text-[#8C583A] mb-1">MY SPACE</p>
         <h1 class="text-2xl font-bold text-zinc-900">{{ profile.nickname }}</h1>
-        <p class="text-xs text-zinc-500 mt-0.5">{{ profile.email }} · {{ profile.provider }}</p>
+        <p class="text-xs text-zinc-500 mt-0.5">
+          {{ profile.email }} · {{ providerLabel(profile.provider) }}
+        </p>
         <p v-if="profile.bio" class="text-sm text-zinc-700 mt-2">{{ profile.bio }}</p>
       </div>
       <div class="flex gap-8 text-center">
@@ -208,6 +210,11 @@ const followModalMode = ref<'followers' | 'followings'>('followers')
 function openFollowModal(mode: 'followers' | 'followings') {
   followModalMode.value = mode
   followModalOpen.value = true
+}
+
+function providerLabel(provider: string) {
+  const map: Record<string, string> = { LOCAL: '이메일 가입', KAKAO: '카카오', GOOGLE: 'Google' }
+  return map[provider] || provider
 }
 
 onMounted(async () => {

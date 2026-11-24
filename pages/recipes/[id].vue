@@ -8,7 +8,7 @@
       <div class="p-6 md:p-10 space-y-6">
         <div class="flex flex-wrap gap-2 text-xs">
           <span class="px-3 py-1 rounded-full bg-zinc-100 text-zinc-800 font-medium">
-            {{ recipe.housingType }} · {{ recipe.areaPyeong }}평 · {{ recipe.contractType }}
+            {{ housingLabel(recipe.housingType) }} · {{ recipe.areaPyeong }}평 · {{ contractLabel(recipe.contractType) }}
           </span>
           <span v-if="recipe.isNoDrill" class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-medium">
             무타공
@@ -54,8 +54,13 @@
           </div>
         </div>
 
-        <div class="whitespace-pre-line text-zinc-700 leading-relaxed text-sm md:text-base break-words">
-          {{ recipe.content }}
+        <div class="space-y-2 text-zinc-700 leading-relaxed text-sm md:text-base break-words">
+          <template v-for="(line, idx) in formattedContentLines" :key="idx">
+            <h3 v-if="line.startsWith('## ')" class="text-base font-bold text-zinc-900 pt-2">
+              {{ line.replace(/^##\s*/, '') }}
+            </h3>
+            <p v-else-if="line.trim()" class="whitespace-pre-line">{{ line }}</p>
+          </template>
         </div>
 
         <div v-if="recipe.items.length" class="pt-4 space-y-3">
@@ -93,6 +98,25 @@ const { request, baseUrl } = useApi()
 
 const id = route.params.id
 const { data: recipe } = await useFetch<RecipeDetail>(`${baseUrl}/api/recipes/${id}`)
+
+const housingMap: Record<string, string> = {
+  ONE_ROOM: '원룸',
+  TWO_ROOM: '투룸',
+  OFFICETEL: '오피스텔',
+  APARTMENT: '아파트'
+}
+const contractMap: Record<string, string> = {
+  JEONSE: '전세',
+  MONTHLY: '월세',
+  OWNED: '자가'
+}
+function housingLabel(type: string) {
+  return housingMap[type] || type
+}
+function contractLabel(type: string) {
+  return contractMap[type] || type
+}
+const formattedContentLines = computed(() => (recipe.value?.content || '').split('\n'))
 
 async function toggleLike() {
   if (!auth.isLoggedIn) {

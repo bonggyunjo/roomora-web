@@ -9,15 +9,15 @@
           </span>
         </NuxtLink>
 
-        <nav class="flex items-center gap-5 md:gap-7 text-sm font-medium text-zinc-600">
-          <NuxtLink to="/search" class="hover:text-zinc-900 transition">공간 찾기</NuxtLink>
-          <NuxtLink to="/recipes" class="hover:text-zinc-900 transition">레시피</NuxtLink>
-          <NuxtLink to="/contest" class="hover:text-zinc-900 transition">콘테스트</NuxtLink>
+        <nav class="flex items-center gap-3 sm:gap-5 md:gap-7 text-xs sm:text-sm font-medium text-zinc-600 whitespace-nowrap">
+          <NuxtLink to="/search" class="hover:text-zinc-900 transition shrink-0">공간 찾기</NuxtLink>
+          <NuxtLink to="/recipes" class="hover:text-zinc-900 transition shrink-0">레시피</NuxtLink>
+          <NuxtLink to="/contest" class="hover:text-zinc-900 transition shrink-0">콘테스트</NuxtLink>
           <template v-if="auth.isLoggedIn">
-            <NuxtLink to="/mypage" class="hover:text-zinc-900 transition">내 공간</NuxtLink>
+            <NuxtLink to="/mypage" class="hover:text-zinc-900 transition shrink-0">내 공간</NuxtLink>
             <button
               type="button"
-              class="px-3.5 py-1.5 rounded-full border border-zinc-300 text-xs font-medium text-zinc-700 hover:bg-zinc-100 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-zinc-900 transition"
+              class="px-3 sm:px-3.5 py-1.5 rounded-full border border-zinc-300 text-xs font-medium text-zinc-700 hover:bg-zinc-100 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-zinc-900 transition shrink-0"
               @click="handleLogout"
             >
               로그아웃
@@ -26,7 +26,7 @@
           <NuxtLink
             v-else
             to="/login"
-            class="px-4 py-2 rounded-full bg-zinc-900 text-white text-xs font-semibold hover:bg-zinc-800 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-zinc-900 transition"
+            class="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-zinc-900 text-white text-xs font-semibold hover:bg-zinc-800 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-zinc-900 transition shrink-0"
           >
             시작하기
           </NuxtLink>

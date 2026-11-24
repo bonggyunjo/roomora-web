@@ -6,7 +6,7 @@
         <p class="text-xs font-semibold tracking-widest uppercase text-[#8C583A]">
           Curated Living Recipes
         </p>
-        <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 leading-[1.2]">
+        <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 leading-[1.25] break-keep">
           전세·무타공·예산에 맞는<br>우리 집 인테리어 레시피
         </h1>
         <p class="text-zinc-500 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
@@ -19,7 +19,7 @@
             <input
               v-model="query"
               type="text"
-              placeholder="예: 전세 6평 북향 원룸, 무타공으로 50만원 안에 따뜻하게"
+              placeholder="예: 전세 6평 북향 원룸, 무타공 50만원"
               class="flex-1 px-4 py-3 bg-transparent text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
             />
             <button
